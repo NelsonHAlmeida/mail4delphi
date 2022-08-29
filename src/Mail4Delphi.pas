@@ -188,11 +188,12 @@ begin
   Result := Self;
   if AMail.Trim.IsEmpty then
     Exit;
-  with FIdMessage.CCList.Add do
-  begin
-    Address := AMail.Trim;
-    Name := AName.Trim;
-  end;
+  FIdMessage.CCList.EMailAddresses := AMail.Trim;
+//  with FIdMessage.CCList.Add do
+//  begin
+//    Address := AMail.Trim;
+//    Name := AName.Trim;
+//  end;
 end;
 
 function TMail.AddReplyTo(const AMail: string; const AName: string = ''): IMail;
@@ -217,14 +218,15 @@ end;
 
 function TMail.AddTo(const AMail: string; const AName: string = ''): IMail;
 begin
+  Result := Self;
   if AMail.Trim.IsEmpty then
     raise Exception.Create('Recipient email not informed!');
-  with FIdMessage.Recipients.Add do
-  begin
-    Address := AMail.Trim;
-    Name := AName.Trim;
-  end;
-  Result := Self;
+  FIdMessage.Recipients.EMailAddresses := AMail.Trim;
+//  with FIdMessage.Recipients.Add do
+//  begin
+//    Address := AMail.Trim;
+//    Name := AName.Trim;
+//  end;
 end;
 
 function TMail.Clear: IMail;
